@@ -1,11 +1,25 @@
 from rooms import scenes
 from characters import enemies
 
+# TODO add inventory system to manage items held by player
+
+# Hero class for tracking of player properties/attributes
+class Hero:
+    def __init__(self, health, damage, name):
+        self.health = health
+        self.damage = damage
+        self.name = name
+
+# game starter function
 def startGame():
+    heroName = input('Welcome to the game! What is your name?')
+    hero = Hero(10, 2, heroName)
+
     currentRoom = scenes.get(1)
     loadScene(currentRoom)
 
 
+# main logic for game
 def loadScene(currentRoom):
     while True:
         desc = currentRoom.get('description')
@@ -35,6 +49,9 @@ def loadScene(currentRoom):
 
                 break
 
+# TODO move fight function inside Hero class to allow proper tracking of health and damage
+
+# function for fighting enemies
 def fightScene(currentRoom, nextRoom):
     enemyId = currentRoom.get('enemy')
     enemy = enemies.get(enemyId)
