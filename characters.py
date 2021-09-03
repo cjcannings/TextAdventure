@@ -3,6 +3,6 @@ enemies = {
     {
         'name': 'Basement Dweller',
         'health': 3,
-        'damage': 5
+        'damage': 4
     }
 }
