@@ -1,4 +1,5 @@
 from rooms import scenes
+from characters import enemies
 
 def startGame():
     currentRoom = scenes.get(1)
@@ -21,12 +22,28 @@ def loadScene(currentRoom):
                 print('That isn\'t an option.')
             else:
                 nextRoom = actions.get(ans)
+
                 if nextRoom == 'previous':
                     currentRoom = previousRoom
+
+                elif nextRoom == 'fight':
+                    fightScene(currentRoom, nextRoom)
+
                 else:
                     previousRoom = currentRoom
                     currentRoom = scenes.get(nextRoom)
+
                 break
+
+def fightScene(currentRoom, nextRoom):
+    enemyId = currentRoom.get('enemy')
+    enemy = enemies.get(enemyId)
+    enemyName = enemy.get('name')
+    enemyHealth = enemy.get('health')
+    enemyDamage = enemy.get('damage')
+    print(f'You attacked the {enemyName}!')
+    return
+
 
 
 startGame()

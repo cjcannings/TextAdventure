@@ -1,8 +1,8 @@
 scenes = {
     1:
     {
-        'description': 'This is the starter room.',
-        'actions': {'Jump in the pit': 2, 'Walk through the door to your left': 3, 'Go upstairs': 4}
+        'description': 'This is the starter room.\n There is a door to your left, staircase to your right, and a large pit ahead of you.',
+        'actions': {'Jump in the pit': 2, 'Walk through the door': 3, 'Go upstairs': 4}
     },
 
     2:
@@ -22,6 +22,7 @@ scenes = {
     7:
     {
         'description': 'As you walk down the stairs, a shadowy figure appears.\n"Who\'s there?\" the person exclaims.',
-        'actions': {'Attack': 'fight'}
+        'actions': {'Attack': 'fight'},
+        'enemy': 1
     }
 }
