@@ -17,12 +17,25 @@ scenes = {
         'actions': {'Walk down the stairs': 7, 'Turn around': 'previous'}
     },
 
-
+    4:
+    {
+        'description': '',
+        'actions': ''
+    },
 
     7:
     {
         'description': 'As you walk down the stairs, a shadowy figure appears.\n"Who\'s there?\" the person exclaims.',
         'actions': {'Attack': 'fight'},
-        'enemy': 1
+        'enemy': 1,
+        'next': 8,
+    },
+
+    # this is a verison of room 7 without the enemy present that
+    # can only be accessed by winning the fight in that room
+    8:
+    {
+        'description': 'Having defeated the basement dweller, you search around the room.',
+        'actions': {'Go back to the starter room': 1, 'Search the body': 'loot', 'Search the crate': 'loot'}
     }
 }
