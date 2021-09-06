@@ -1,15 +1,17 @@
 from rooms import scenes
 from characters import enemies
+from items import items
 
 import random
 
-# TODO add inventory system to manage items held by player
+# TODO add list of loot/fight rooms that the player has already cleared, preventing them from returning
 # Hero class for tracking of player properties/attributes
 class Hero:
     def __init__(self, health, damage, name):
         self.health = health
         self.damage = damage
         self.name = name
+        self.inventory = {'consumables': []}
 
     # function for fighting enemies
     def fight(self, currentRoom):
@@ -18,7 +20,8 @@ class Hero:
         enemyName = enemy.get('name')
         enemyHealth = enemy.get('health')
         enemyDamage = enemy.get('damage')
-
+        # TODO implement weapon damage increase if hero has one in inventory
+        # TODO implement armour damage reduction if hero has one in inventory
         while enemyHealth > 0:
             # damage dealt is within 20% of the enemy/hero's original damage, allowing same variation
             enemyDealt = random.randint(round(enemyDamage * 0.8), round(enemyDamage * 1.2))
@@ -36,6 +39,48 @@ class Hero:
 
         print(f'You killed the {enemyName}! You have {self.health} health remaining.')
 
+        nextRoomNum = currentRoom.get('next')
+        nextRoom = scenes.get(nextRoomNum)
+        loadScene(nextRoom, self)
+
+        return
+
+    def loot(self, currentRoom):
+        lootId = currentRoom.get('loot')
+        loot = items.get(lootId)
+        lootName = loot.get('name')
+        lootType = loot.get('type')
+        print(f'You found a {lootName}!')
+
+        if lootType == 'weapon':
+            lootDamage = loot.get('damage')
+            if self.inventory.get('weapon') is None:
+                print(f'This item gives you {lootDamage} extra damage.')
+                self.inventory['weapon'] = lootId
+            elif lootDamage > items.get(self.inventory.get('weapon')).get('damage'):
+                damageDiff = lootDamage - items.get(self.inventory.get('weapon')).get('damage')
+                print(f'This item is stronger than your current weapon by {damageDiff} damage.')
+                self.inventory['weapon'] = lootId
+            else:
+                print('Nice find, but this item is weaker than your current weapon.')
+
+        elif lootType == 'armour':
+            lootArmour = loot.get('armour')
+            if self.inventory.get('armour') is None:
+                print(f'This item gives you {lootArmour} extra armour.')
+                self.inventory['armour'] = lootId
+            elif lootArmour > items.get(self.inventory.get('armour')).get('protection'):
+                protectionDiff = lootArmour - items.get(self.inventory.get('armour')).get('protection')
+                print(f'This piece of armour gives you {protectionDiff} armour points over what you\'re currently wearing.')
+                self.inventory['armour'] = lootId
+            else:
+                print('A good piece of extra protection, but not as effective as what you already have.')
+
+        # potions, etc.
+        elif lootType == 'consumable':
+            print(f'You found a {lootName}!')
+            self.inventory['consumables'].append(lootId)
+        
         nextRoomNum = currentRoom.get('next')
         nextRoom = scenes.get(nextRoomNum)
         loadScene(nextRoom, self)
@@ -97,6 +142,9 @@ def loadScene(currentRoom, hero):
 
                 if nextRoom == 'previous':
                     currentRoom = previousRoom
+
+                elif nextRoom == 'loot':
+                    hero.loot(currentRoom)
 
                 elif nextRoom == 'fight':
                     hero.fight(currentRoom)
