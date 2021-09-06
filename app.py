@@ -52,9 +52,19 @@ def startGame():
     loadScene(currentRoom, hero)
 
 
-# TODO
 def endGame():
     print('You died.')
+    print('Would you look to play again?')
+    ans = ''
+    while ans.lower() != 'y' or ans.lower() != 'n':
+        ans = input('Enter \'y\' for yes, or \'n\' for no.')
+        if ans.lower() == 'y':
+            startGame()
+        elif ans.lower() == 'n':
+            print('Thanks for playing! Goodbye.')
+            quit()
+        else:
+            print('I didn\'t understand that.')
     return
 
 # main logic for game
