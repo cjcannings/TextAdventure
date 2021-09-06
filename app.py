@@ -4,7 +4,6 @@ from characters import enemies
 import random
 
 # TODO add inventory system to manage items held by player
-
 # Hero class for tracking of player properties/attributes
 class Hero:
     def __init__(self, health, damage, name):
@@ -55,6 +54,7 @@ def startGame():
 
 # TODO
 def endGame():
+    print('You died.')
     return
 
 # main logic for game
@@ -64,16 +64,26 @@ def loadScene(currentRoom, hero):
         print(f'{desc} \n')
 
         actions = currentRoom.get('actions')
+        i = 0
+        options = {}
         for action in actions.keys():
-            print(action)
+            i += 1
+            options[i] = action
+            print(f'{i} - {action}')
 
         while True:
-            ans = input('What would you like to do?\n')
+            ans = int(input('What would you like to do?\n'))
             
+            '''
             if ans not in actions:
                 print('That isn\'t an option.')
+            '''
+
+            if ans not in options.keys():
+                print('That is not an option.')
             else:
-                nextRoom = actions.get(ans)
+                #nextRoom = actions.get(ans)
+                nextRoom = actions.get(options.get(ans))
 
                 if nextRoom == 'previous':
                     currentRoom = previousRoom
