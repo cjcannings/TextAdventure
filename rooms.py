@@ -36,6 +36,21 @@ scenes = {
     8:
     {
         'description': 'Having defeated the basement dweller, you search around the room.',
-        'actions': {'Go back to the starter room': 1, 'Search the body': 'loot', 'Search the crate': 'loot'}
+        'actions': {'Go back to the starter room': 1, 'Search the body': 'loot', 'Light the candle': 10},
+        'loot': 1,
+        'next': 9
+    },
+
+    9:
+    {
+        'description': 'After looting the room, the only way from here is back to where you came from.',
+        'actions': {'Go back to the starter room': 1}
+    },
+
+    10:
+    {
+        'description': '''On the walls, you spot a cryptic message, describing an evil being that stands at over
+        12 feet tall, warning anybody reading this to avoid conflict with the monster.''',
+        'actions': {'Go back to the starter room': 1}
     }
 }
