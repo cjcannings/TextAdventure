@@ -10,17 +10,27 @@ class Hero:
         self.damage = damage
         self.name = name
 
+    # function for fighting enemies
+    def fight(self, currentRoom, nextRoom):
+        enemyId = currentRoom.get('enemy')
+        enemy = enemies.get(enemyId)
+        enemyName = enemy.get('name')
+        enemyHealth = enemy.get('health')
+        enemyDamage = enemy.get('damage')
+        print(f'You attacked the {enemyName}!')
+        return
+
 # game starter function
 def startGame():
     heroName = input('Welcome to the game! What is your name?')
     hero = Hero(10, 2, heroName)
 
     currentRoom = scenes.get(1)
-    loadScene(currentRoom)
+    loadScene(currentRoom, hero)
 
 
 # main logic for game
-def loadScene(currentRoom):
+def loadScene(currentRoom, hero):
     while True:
         desc = currentRoom.get('description')
         print(f'{desc} \n')
@@ -41,7 +51,7 @@ def loadScene(currentRoom):
                     currentRoom = previousRoom
 
                 elif nextRoom == 'fight':
-                    fightScene(currentRoom, nextRoom)
+                    hero.fight(currentRoom, nextRoom)
 
                 else:
                     previousRoom = currentRoom
@@ -49,17 +59,7 @@ def loadScene(currentRoom):
 
                 break
 
-# TODO move fight function inside Hero class to allow proper tracking of health and damage
 
-# function for fighting enemies
-def fightScene(currentRoom, nextRoom):
-    enemyId = currentRoom.get('enemy')
-    enemy = enemies.get(enemyId)
-    enemyName = enemy.get('name')
-    enemyHealth = enemy.get('health')
-    enemyDamage = enemy.get('damage')
-    print(f'You attacked the {enemyName}!')
-    return
 
 
 
