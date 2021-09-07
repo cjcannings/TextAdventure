@@ -136,27 +136,20 @@ def loadScene(currentRoom, hero):
 
         while True:
             ans = int(input('What would you like to do?\n'))
-            
-            '''
-            if ans not in actions:
-                print('That isn\'t an option.')
-            '''
-
             if ans not in options.keys():
                 print('That is not an option.')
             else:
-                #nextRoom = actions.get(ans)
                 nextRoom = actions.get(options.get(ans))
 
+                # if player chooses special room type
                 if nextRoom == 'previous':
                     currentRoom = previousRoom
-
                 elif nextRoom == 'loot':
                     hero.loot(currentRoom)
-
                 elif nextRoom == 'fight':
                     hero.fight(currentRoom)
 
+                # if player chooses standard room
                 elif scenes.get(nextRoom) not in hero.visited:
                     previousRoom = currentRoom
                     currentRoom = scenes.get(nextRoom)
