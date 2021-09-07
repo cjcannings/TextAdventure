@@ -4,7 +4,6 @@ from items import items
 
 import random
 
-# TODO add list of loot/fight rooms that the player has already cleared, preventing them from returning
 # Hero class for tracking of player properties/attributes
 class Hero:
     def __init__(self, health, damage, name):
@@ -12,6 +11,7 @@ class Hero:
         self.damage = damage
         self.name = name
         self.inventory = {'consumables': []}
+        self.visited = []
 
     # function for fighting enemies
     def fight(self, currentRoom):
@@ -39,6 +39,7 @@ class Hero:
 
         print(f'You killed the {enemyName}! You have {self.health} health remaining.')
 
+        self.visited.append(currentRoom)
         nextRoomNum = currentRoom.get('next')
         nextRoom = scenes.get(nextRoomNum)
         loadScene(nextRoom, self)
@@ -50,37 +51,44 @@ class Hero:
         loot = items.get(lootId)
         lootName = loot.get('name')
         lootType = loot.get('type')
-        print(f'You found a {lootName}!')
 
-        if lootType == 'weapon':
-            lootDamage = loot.get('damage')
-            if self.inventory.get('weapon') is None:
-                print(f'This item gives you {lootDamage} extra damage.')
-                self.inventory['weapon'] = lootId
-            elif lootDamage > items.get(self.inventory.get('weapon')).get('damage'):
-                damageDiff = lootDamage - items.get(self.inventory.get('weapon')).get('damage')
-                print(f'This item is stronger than your current weapon by {damageDiff} damage.')
-                self.inventory['weapon'] = lootId
-            else:
-                print('Nice find, but this item is weaker than your current weapon.')
-
-        elif lootType == 'armour':
-            lootArmour = loot.get('armour')
-            if self.inventory.get('armour') is None:
-                print(f'This item gives you {lootArmour} extra armour.')
-                self.inventory['armour'] = lootId
-            elif lootArmour > items.get(self.inventory.get('armour')).get('protection'):
-                protectionDiff = lootArmour - items.get(self.inventory.get('armour')).get('protection')
-                print(f'This piece of armour gives you {protectionDiff} armour points over what you\'re currently wearing.')
-                self.inventory['armour'] = lootId
-            else:
-                print('A good piece of extra protection, but not as effective as what you already have.')
-
-        # potions, etc.
-        elif lootType == 'consumable':
+        if currentRoom not in self.visited:
             print(f'You found a {lootName}!')
-            self.inventory['consumables'].append(lootId)
-        
+
+            if lootType == 'weapon':
+                lootDamage = loot.get('damage')
+                if self.inventory.get('weapon') is None:
+                    print(f'This item gives you {lootDamage} extra damage.')
+                    self.inventory['weapon'] = lootId
+                elif lootDamage > items.get(self.inventory.get('weapon')).get('damage'):
+                    damageDiff = lootDamage - items.get(self.inventory.get('weapon')).get('damage')
+                    print(f'This item is stronger than your current weapon by {damageDiff} damage.')
+                    self.inventory['weapon'] = lootId
+                else:
+                    print('Nice find, but this item is weaker than your current weapon.')
+
+            elif lootType == 'armour':
+                lootArmour = loot.get('armour')
+                if self.inventory.get('armour') is None:
+                    print(f'This item gives you {lootArmour} extra armour.')
+                    self.inventory['armour'] = lootId
+                elif lootArmour > items.get(self.inventory.get('armour')).get('protection'):
+                    protectionDiff = lootArmour - items.get(self.inventory.get('armour')).get('protection')
+                    print(f'This piece of armour gives you {protectionDiff} armour points over what you\'re currently wearing.')
+                    self.inventory['armour'] = lootId
+                else:
+                    print('A good piece of extra protection, but not as effective as what you already have.')
+
+            # potions, etc.
+            elif lootType == 'consumable':
+                print(f'You found a {lootName}!')
+                self.inventory['consumables'].append(lootId)
+            
+            self.visited.append(currentRoom)
+
+        else:
+            print('You have already looted this item!')
+
         nextRoomNum = currentRoom.get('next')
         nextRoom = scenes.get(nextRoomNum)
         loadScene(nextRoom, self)
@@ -149,9 +157,14 @@ def loadScene(currentRoom, hero):
                 elif nextRoom == 'fight':
                     hero.fight(currentRoom)
 
-                else:
+                elif scenes.get(nextRoom) not in hero.visited:
                     previousRoom = currentRoom
                     currentRoom = scenes.get(nextRoom)
+
+                # if next room has already been visited in case of fight
+                else:
+                    print('You can\'t go there again!')
+                    continue
 
                 break
 
