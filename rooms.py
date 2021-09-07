@@ -31,7 +31,7 @@ scenes = {
         'next': 8,
     },
 
-    # this is a verison of room 7 without the enemy present that
+    # this is a version of room 7 without the enemy present that
     # can only be accessed by winning the fight in that room
     8:
     {
