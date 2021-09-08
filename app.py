@@ -20,16 +20,22 @@ class Hero:
         enemyName = enemy.get('name')
         enemyHealth = enemy.get('health')
         enemyDamage = enemy.get('damage')
-        # TODO implement weapon damage increase if hero has one in inventory
-        # TODO implement armour damage reduction if hero has one in inventory
+
+        damageModified = 0
+        armourModified = 0
+
+        if self.inventory.get('weapon'):
+            damageModified = items.get(self.inventory.get('weapon')).get('damage')
+        if self.inventory.get('armour'):
+            armourModified = items.get(self.inventory.get('armour')).get('protection')
         while enemyHealth > 0:
-            # damage dealt is within 20% of the enemy/hero's original damage, allowing same variation
-            enemyDealt = random.randint(round(enemyDamage * 0.8), round(enemyDamage * 1.2))
-            heroDealt = random.randint(round(self.damage * 0.8), round(self.damage * 1.2))
+            # damage dealt is within 20%, rounded, of the enemy/hero's original damage, allowing same variation
+            enemyDealt = random.randint(round((enemyDamage - armourModified) * 0.8), round((enemyDamage - armourModified) * 1.2))
+            heroDealt = random.randint(round((damageModified + self.damage) * 0.8), round((damageModified + self.damage) * 1.2))
 
             enemyHealth -= heroDealt
             print(f'You dealt {heroDealt} damage!')
-            # perform check to ensure enemy does not deal damage after health is already depleted
+            # perform check to ensure enemy does not deal damage after its health is already depleted
             if enemyHealth <= 0:
                 break
             self.health -= enemyDealt
