@@ -30,6 +30,7 @@ class Hero:
             armourModified = items.get(self.inventory.get('armour')).get('protection')
         while enemyHealth > 0:
             # damage dealt is within 20%, rounded, of the enemy/hero's original damage, allowing same variation
+            # subtract armour protection from damage dealt by enemy, and add weapon damage to damage dealt by hero
             enemyDealt = random.randint(round((enemyDamage - armourModified) * 0.8), round((enemyDamage - armourModified) * 1.2))
             heroDealt = random.randint(round((damageModified + self.damage) * 0.8), round((damageModified + self.damage) * 1.2))
 
@@ -92,6 +93,7 @@ class Hero:
             
             self.visited.append(currentRoom)
 
+        # prevent player from visiting loot room more than once
         else:
             print('You have already looted this item!')
 
@@ -111,6 +113,7 @@ def startGame():
     loadScene(currentRoom, hero)
 
 
+# end game function called when player dies
 def endGame():
     print('You died.')
     print('Would you look to play again?')
