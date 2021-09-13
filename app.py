@@ -10,7 +10,7 @@ class Hero:
         self.health = health
         self.damage = damage
         self.name = name
-        self.inventory = {'consumables': []}
+        self.inventory = {'consumables': [], 'keys': []}
         self.visited = []
 
     # function for fighting enemies
