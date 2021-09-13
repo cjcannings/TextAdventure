@@ -14,7 +14,8 @@ scenes = {
     300:
     {
         'description': 'You\'ve found the entrance to the basement. Who knows what might be down there...',
-        'actions': {'Walk down the stairs': 301, 'Turn around': 'previous'}
+        'actions': {'Walk down the stairs': 301, 'Turn around': 'previous'},
+        'next': 302
     },
 
     400:

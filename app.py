@@ -164,6 +164,10 @@ def loadScene(currentRoom, hero):
                     currentRoom = scenes.get(nextRoom)
 
                 # if next room has already been visited in case of fight
+                elif scenes.get(nextRoom) in hero.visited and currentRoom.get('next') is not None:
+                    nextRoomNum = currentRoom.get('next')
+                    currentRoom = scenes.get(nextRoomNum)
+
                 else:
                     print('You can\'t go there again!')
                     continue
