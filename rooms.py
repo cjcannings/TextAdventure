@@ -58,16 +58,17 @@ scenes = {
 
     305:
     {
-        'description': 'As you move the bookshelf that was mostly covering up the hatch, you notice that it is locked.',
-        'actions': {'Unlock the hatch': 'locked', 'Go back to search for the missing key': 1},
+        'description': ('As you move the bookshelf that was mostly covering up the hatch, you notice that it is locked.'
+        'You\'ll need to find the right key to unlock it.'),
+        'actions': {'Open the hatch': 'locked', 'Go back to search for the missing key': 1},
         'required': 2,
         'next': 306
     },
 
     306:
     {
-        'description': '',
-        'actions': {}
+        'description': 'test',
+        'actions': {'test': 'test'}
     },
 
     307:

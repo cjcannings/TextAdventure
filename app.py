@@ -103,8 +103,28 @@ class Hero:
 
         return
 
+    # TODO add functionality for unlocking chests/doors/hatches etc.
+    def unlock(self, currentRoom):
+
+        if currentRoom not in self.visited and items.get(currentRoom.get('required')) in self.inventory.get('keys'):
+            print('You used a key!')
+            self.visited.append(currentRoom)
+            nextRoomNum = currentRoom.get('next')
+            nextRoom = scenes.get(nextRoomNum)
+            loadScene(nextRoom, self)
+
+        elif currentRoom in self.visited:
+            nextRoomNum = currentRoom.get('next')
+            nextRoom = scenes.get(nextRoomNum)
+            loadScene(nextRoom, self)
+
+        else:
+            print('You haven\'t found the key you need yet!')
+
+        return
+
 # game starter function
-def startGame():
+def main():
     heroName = input('Welcome to the game! What is your name?')
     print(f'Hello there, {heroName}!')
     hero = Hero(10, 2, heroName)
@@ -121,7 +141,7 @@ def endGame():
     while ans.lower() != 'y' or ans.lower() != 'n':
         ans = input('Enter \'y\' for yes, or \'n\' for no.')
         if ans.lower() == 'y':
-            startGame()
+            main()
         elif ans.lower() == 'n':
             print('Thanks for playing! Goodbye.')
             quit()
@@ -157,6 +177,8 @@ def loadScene(currentRoom, hero):
                     hero.loot(currentRoom)
                 elif nextRoom == 'fight':
                     hero.fight(currentRoom)
+                elif nextRoom == 'locked':
+                    hero.unlock(currentRoom)
 
                 # if player chooses standard room
                 elif scenes.get(nextRoom) not in hero.visited:
@@ -178,4 +200,5 @@ def loadScene(currentRoom, hero):
 
 
 
-startGame()
+if __name__ == '__main__':
+    main()
