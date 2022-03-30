@@ -45,7 +45,7 @@ scenes = {
     303:
     {
         'description': 'After looting the room, the only way from here is back to where you came from.',
-        'actions': {'Go back to the starter room': 1}
+        'actions': {'Go back to the starter room': 1, 'Take a closer look': 304}
     },
 
     304:
@@ -58,7 +58,7 @@ scenes = {
 
     305:
     {
-        'description': ('As you move the bookshelf that was mostly covering up the hatch, you notice that it is locked.'
+        'description': ('As you move the bookshelf that stands between you and the hatch, you notice that it is locked.\n'
         'You\'ll need to find the right key to unlock it.'),
         'actions': {'Open the hatch': 'locked', 'Go back to search for the missing key': 1},
         'required': 2,
@@ -67,8 +67,11 @@ scenes = {
 
     306:
     {
-        'description': 'test',
-        'actions': {'test': 'test'}
+        'description': ('The hatch creaks open, revealing a ladder that leads into darkness. It would be unwise to\n'
+        'descend without a source of light, but that\'s never stopped you from taking an adventure in the past...'),
+        'actions': {'test': 'test'},
+        'required': 3,
+        'next': 0
     },
 
     307:
