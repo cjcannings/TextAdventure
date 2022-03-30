@@ -10,5 +10,11 @@ items = {
     {
         'name': 'Basement Hatch Key',
         'type': 'key'
+    },
+
+    3:
+    {
+        'name': 'Flashlight',
+        'type': 'utility'
     }
 }
