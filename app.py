@@ -52,6 +52,7 @@ class Hero:
 
         return nextRoom
 
+    # TODO no logic for lootType == key so keys are unobtainable
     def loot(self, currentRoom):
         lootId = currentRoom.get('loot')
         loot = items.get(lootId)
