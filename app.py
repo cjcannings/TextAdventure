@@ -49,9 +49,8 @@ class Hero:
         self.visited.append(currentRoom)
         nextRoomNum = currentRoom.get('next')
         nextRoom = scenes.get(nextRoomNum)
-        loadScene(nextRoom, self)
 
-        return
+        return nextRoom
 
     def loot(self, currentRoom):
         lootId = currentRoom.get('loot')
@@ -99,9 +98,8 @@ class Hero:
 
         nextRoomNum = currentRoom.get('next')
         nextRoom = scenes.get(nextRoomNum)
-        loadScene(nextRoom, self)
 
-        return
+        return nextRoom
 
     # TODO add functionality for unlocking chests/doors/hatches etc.
     def unlock(self, currentRoom):
@@ -111,17 +109,16 @@ class Hero:
             self.visited.append(currentRoom)
             nextRoomNum = currentRoom.get('next')
             nextRoom = scenes.get(nextRoomNum)
-            loadScene(nextRoom, self)
 
         elif currentRoom in self.visited:
             nextRoomNum = currentRoom.get('next')
             nextRoom = scenes.get(nextRoomNum)
-            loadScene(nextRoom, self)
 
         else:
             print('You haven\'t found the key you need yet!')
+            nextRoom = currentRoom
 
-        return
+        return nextRoom
 
 # game starter function
 def main():
@@ -176,11 +173,11 @@ def loadScene(currentRoom, hero):
                 if nextRoom == 'previous':
                     currentRoom = previousRoom
                 elif nextRoom == 'loot':
-                    hero.loot(currentRoom)
+                    currentRoom = hero.loot(currentRoom)
                 elif nextRoom == 'fight':
-                    hero.fight(currentRoom)
+                    currentRoom = hero.fight(currentRoom)
                 elif nextRoom == 'locked':
-                    hero.unlock(currentRoom)
+                    currentRoom = hero.unlock(currentRoom)
 
                 # if player chooses standard room
                 elif scenes.get(nextRoom) not in hero.visited:
