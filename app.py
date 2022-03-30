@@ -95,7 +95,7 @@ class Hero:
 
         # prevent player from visiting loot room more than once
         else:
-            print('You have already looted this item!')
+            print('You have already looted this area!')
 
         nextRoomNum = currentRoom.get('next')
         nextRoom = scenes.get(nextRoomNum)
@@ -165,6 +165,8 @@ def loadScene(currentRoom, hero):
 
         while True:
             ans = int(input('What would you like to do?\n'))
+            # expecting int value of 1, 2, etc. depending on how many
+            # actions are available in current room
             if ans not in options.keys():
                 print('That is not an option.')
             else:
