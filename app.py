@@ -52,7 +52,7 @@ class Hero:
 
         return nextRoom
 
-    # TODO no logic for lootType == key so keys are unobtainable
+    # function for looting a room
     def loot(self, currentRoom):
         lootId = currentRoom.get('loot')
         loot = items.get(lootId)
@@ -102,10 +102,10 @@ class Hero:
 
         return nextRoom
 
-    # TODO add functionality for unlocking chests/doors/hatches etc.
+    # function for unlocking a chest/door/hatch using a key in inventory
     def unlock(self, currentRoom):
 
-        if currentRoom not in self.visited and items.get(currentRoom.get('required')) in self.inventory.get('keys'):
+        if currentRoom not in self.visited and currentRoom.get('required') in self.inventory.get('keys'):
             print('You used a key!')
             self.visited.append(currentRoom)
             nextRoomNum = currentRoom.get('next')
