@@ -88,7 +88,6 @@ class Hero:
 
             # potions, etc.
             elif lootType == 'consumable':
-                print(f'You found a {lootName}!')
                 self.inventory['consumables'].append(lootId)
 
             elif lootType == 'key':
