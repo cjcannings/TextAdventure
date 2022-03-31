@@ -90,6 +90,9 @@ class Hero:
             elif lootType == 'consumable':
                 print(f'You found a {lootName}!')
                 self.inventory['consumables'].append(lootId)
+
+            elif lootType == 'key':
+                self.inventory['keys'].append(lootId)
             
             self.visited.append(currentRoom)
 
