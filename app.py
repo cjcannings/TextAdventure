@@ -93,6 +93,8 @@ class Hero:
             elif lootType == 'key':
                 self.inventory['keys'].append(lootId)
             
+            # add room to list of visited rooms to properly track what has
+            # or has not been looted in the current instance
             self.visited.append(currentRoom)
 
         # prevent player from visiting loot room more than once
@@ -123,7 +125,7 @@ class Hero:
 
         return nextRoom
 
-# game starter function
+# main function that initialises required objects and calls loadScene function
 def main():
     heroName = input('Welcome to the game! What is your name?')
     print(f'Hello there, {heroName}!')
@@ -158,6 +160,7 @@ def loadScene(currentRoom, hero):
         actions = currentRoom.get('actions')
         i = 0
         options = {}
+        # create list of actions per room, print action and corresponding number
         for action in actions.keys():
             i += 1
             options[i] = action
@@ -172,7 +175,7 @@ def loadScene(currentRoom, hero):
             else:
                 nextRoom = actions.get(options.get(ans))
 
-                # if player chooses special room type
+                # if player chooses action that leads to a special room type
                 if nextRoom == 'previous':
                     currentRoom = previousRoom
                 elif nextRoom == 'loot':
