@@ -127,8 +127,8 @@ class Hero:
 
 # main function that initialises required objects and calls loadScene function
 def main():
-    heroName = input('Welcome to the game! What is your name?')
-    print(f'Hello there, {heroName}!')
+    heroName = input('Welcome to the game! What is your name?\n')
+    print(f'\nHello there, {heroName}!')
     hero = Hero(10, 2, heroName)
 
     currentRoom = scenes.get(1)
