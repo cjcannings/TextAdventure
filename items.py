@@ -16,5 +16,19 @@ items = {
     {
         'name': 'Flashlight',
         'type': 'utility'
+    },
+
+    4:
+    {
+        'name': 'Predator Bow',
+        'type': 'weapon',
+        'damage': 3
+    },
+
+    5:
+    {
+        'name': 'Rogue Cape',
+        'type': 'armour',
+        'protection': 1
     }
 }
