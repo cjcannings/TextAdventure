@@ -125,11 +125,28 @@ class Hero:
 
         return nextRoom
 
+class Rogue(Hero):
+    def __init__(self, health, damage, name):
+        super().__init__(health, damage, name)
+        self.inventory.update({'weapon':4, 'armour':5})
+
 # main function that initialises required objects and calls loadScene function
 def main():
     heroName = input('Welcome to the game! What is your name?\n')
-    print(f'\nHello there, {heroName}!')
-    hero = Hero(10, 2, heroName)
+    print(f'\nHello there, {heroName}!\n')
+
+    # class selection
+    print('Rogue - A sneaky warrior trained in the art of stealth.')
+    print('None - You don\'t need any handouts.')
+    heroClass = input('What class do you choose?\n')
+
+    # Rogue class has lower health but starts with bow and light armour
+    if heroClass.lower() == 'rogue':
+        hero = Rogue(8, 2, heroName)
+
+    # Hero class has base stats and no inventory items 
+    elif heroClass.lower() == 'none':
+        hero = Hero(10, 2, heroName)
 
     currentRoom = scenes.get(1)
     loadScene(currentRoom, hero)
