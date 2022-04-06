@@ -11,5 +11,12 @@ enemies = {
         'name': 'Bridge Troll',
         'health': 3,
         'damage': 2
+    },
+
+    3:
+    {
+        'name': 'Group of Adventurers',
+        'health': 15,
+        'damage': 5
     }
 }
