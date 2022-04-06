@@ -30,5 +30,19 @@ items = {
         'name': 'Rogue Cape',
         'type': 'armour',
         'protection': 1
+    },
+
+    6:
+    {
+        'name': 'Wooden Club',
+        'type': 'weapon',
+        'damage': 2
+    },
+
+    7:
+    {
+        'name': 'Heavy Armour',
+        'type': 'armour',
+        'protection': 2
     }
 }
