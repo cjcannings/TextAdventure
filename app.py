@@ -136,7 +136,9 @@ def main():
     print(f'\nHello there, {heroName}!\n')
 
     # class selection
-    print('Rogue - A sneaky warrior trained in the art of stealth.')
+    print('Warrior - An immense fighter with strong physicality.')
+    print('Rogue - A natural survivor focused on keeping distance.')
+    print('Mage - An illusive character dedicated to the school of magic.')
     print('None - You don\'t need any handouts.')
     heroClass = input('What class do you choose?\n')
 
