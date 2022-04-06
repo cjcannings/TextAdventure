@@ -125,10 +125,15 @@ class Hero:
 
         return nextRoom
 
+class Warrior(Hero):
+    def __init__(self, health, damage, name):
+        super().__init__(health, damage, name)
+        self.inventory.update({'weapon': 6, 'armour': 7})
+
 class Rogue(Hero):
     def __init__(self, health, damage, name):
         super().__init__(health, damage, name)
-        self.inventory.update({'weapon':4, 'armour':5})
+        self.inventory.update({'weapon': 4, 'armour': 5})
 
 # main function that initialises required objects and calls loadScene function
 def main():
@@ -141,6 +146,10 @@ def main():
     print('Mage - An illusive character dedicated to the school of magic.')
     print('None - You don\'t need any handouts.')
     heroClass = input('What class do you choose?\n')
+
+    # Warrior class has slightly higher health and club/heavy armour starter gear
+    if heroClass.lower() == 'warrior':
+        hero = Warrior(11, 2, heroName)
 
     # Rogue class has lower health but starts with bow and light armour
     if heroClass.lower() == 'rogue':
