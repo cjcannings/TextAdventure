@@ -11,17 +11,26 @@ scenes = {
         'actions': {'Walk into the forest': 201, 'Turn around and go back inside': 'previous'}
     },
 
+    201:
+    {
+        'description': 'As you walk towards the fire, you notice a group of adventurers gathered around it. '
+        'One of them starts to move away from the rest of the group, but you are unsure why.',
+        'actions': {'Slowly approach the group.': 202, 'Sneak around behind the straggler': 203}
+    },
+
+    202:
+    {
+        'description': 'Someone from the group spots you approaching, and immediately alerts the others. Suddenly, you find yourself outnumbered.',
+        'actions': {'Attack the group.': 'fight', 'Try to talk with the group.': 205, 'Run away, deeper into the forest.': 206},
+        'enemy': 3,
+        'next': 204
+    },
+
     300:
     {
         'description': 'You\'ve found the entrance to the basement. Who knows what might be down there...',
         'actions': {'Walk down the stairs': 301, 'Turn around': 'previous'},
         'next': 302
-    },
-
-    400:
-    {
-        'description': '',
-        'actions': ''
     },
 
     301:
