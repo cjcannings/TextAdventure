@@ -155,14 +155,17 @@ def main():
     # Warrior class has slightly higher health and club/heavy armour starter gear
     if heroClass.lower() == 'warrior':
         hero = Warrior(11, 2, heroName)
+        print('Welcome, Warrior.')
 
     # Rogue class has lower health but starts with bow and light armour
-    if heroClass.lower() == 'rogue':
+    elif heroClass.lower() == 'rogue':
         hero = Rogue(8, 2, heroName)
+        print('Welcome, Rogue.')
 
     # Mage class has lower health and minor starting armour but high damage
-    if heroClass.lower() == 'mage':
+    elif heroClass.lower() == 'mage':
         hero = Mage(6, 3, heroName)
+        print('Welcome, Mage.')
 
     # Hero class has base stats and no inventory items 
     else:
