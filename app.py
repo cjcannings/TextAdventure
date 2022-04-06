@@ -135,6 +135,11 @@ class Rogue(Hero):
         super().__init__(health, damage, name)
         self.inventory.update({'weapon': 4, 'armour': 5})
 
+class Mage(Hero):
+    def __init__(self, health, damage, name):
+        super().__init__(health, damage, name)
+        self.inventory.update({'weapon': 8, 'armour': 9})
+
 # main function that initialises required objects and calls loadScene function
 def main():
     heroName = input('Welcome to the game! What is your name?\n')
@@ -155,8 +160,12 @@ def main():
     if heroClass.lower() == 'rogue':
         hero = Rogue(8, 2, heroName)
 
+    # Mage class has lower health and minor starting armour but high damage
+    if heroClass.lower() == 'mage':
+        hero = Mage(6, 3, heroName)
+
     # Hero class has base stats and no inventory items 
-    elif heroClass.lower() == 'none':
+    else:
         hero = Hero(10, 2, heroName)
 
     currentRoom = scenes.get(1)
