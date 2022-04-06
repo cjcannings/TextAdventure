@@ -44,5 +44,19 @@ items = {
         'name': 'Heavy Armour',
         'type': 'armour',
         'protection': 2
+    },
+
+    8:
+    {
+        'name': 'Staff',
+        'type': 'weapon',
+        'damage': 4
+    },
+
+    9:
+    {
+        'name': 'Magic Cloak',
+        'type': 'armour',
+        'protection': 1
     }
 }
