@@ -44,7 +44,17 @@ class Hero:
                 endGame()
             print(f'Ouch! You took {enemyDealt} damage!')
 
-        print(f'You killed the {enemyName}! You have {self.health} health remaining.')
+        print(f'You killed the {enemyName}! You have {self.health} health remaining. Would you like to heal?')
+
+        ans = ''
+        while ans.lower() != 'y' or ans.lower() != 'n':
+            ans = input('Enter \'y\' for yes, or \'n\' for no.\n')
+            if ans.lower() == 'y':
+                print('heal')
+                self.heal()
+                break
+            elif not ans.lower() == 'n':
+                print('I didn\'t understand that.')
 
         self.visited.append(currentRoom)
         nextRoomNum = currentRoom.get('next')
@@ -125,6 +135,31 @@ class Hero:
 
         return nextRoom
 
+    # function for healing hero
+    def heal(self):
+        potions = []
+        count = 0
+
+        for item in self.inventory.get('consumables'):
+            current = items.get(item)
+            if current.get('type') == 'consumable':
+                count += 1
+                potions.append(current)
+                print(f'{count} - {current.get("name")} restores {current.get("value")} health.')
+        
+        healChoice = int(input('Which consumable would you like to use?\n'))
+        self.health += potions[healChoice - 1].get('value')
+        count = 0
+
+        for item in self.inventory.get('consumables'):
+            current = items.get(item)
+            if current.get('name') == potions[healChoice - 1].get('name'):
+                del self.inventory.get('consumables')[count]
+                break
+            count += 1
+
+        print(f'You now have {self.health} remaining.')
+
 class Warrior(Hero):
     def __init__(self, health, damage, name):
         super().__init__(health, damage, name)
@@ -133,7 +168,7 @@ class Warrior(Hero):
 class Rogue(Hero):
     def __init__(self, health, damage, name):
         super().__init__(health, damage, name)
-        self.inventory.update({'weapon': 4, 'armour': 5})
+        self.inventory.update({'weapon': 4, 'armour': 5, 'consumables': [10]})
 
 class Mage(Hero):
     def __init__(self, health, damage, name):
