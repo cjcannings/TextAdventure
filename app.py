@@ -213,7 +213,7 @@ def main():
 # end game function called when player dies
 def endGame():
     print('You died.')
-    print('Would you look to play again?')
+    print('Would you like to play again?')
     ans = ''
     while ans.lower() != 'y' or ans.lower() != 'n':
         ans = input('Enter \'y\' for yes, or \'n\' for no.')
