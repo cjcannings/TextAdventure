@@ -58,5 +58,19 @@ items = {
         'name': 'Magic Cloak',
         'type': 'armour',
         'protection': 1
+    },
+
+    10:
+    {
+        'name': 'Small Healing Potion',
+        'type': 'consumable',
+        'value': 3
+    },
+
+    11:
+    {
+        'name': 'Large Healing Potion',
+        'type': 'consumable',
+        'value': 5
     }
 }
