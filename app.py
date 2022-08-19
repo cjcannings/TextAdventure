@@ -53,8 +53,10 @@ class Hero:
                 print('heal')
                 self.heal()
                 break
-            elif not ans.lower() == 'n':
+            elif ans.lower() != 'n':
                 print('I didn\'t understand that.')
+            else:
+                break
 
         self.visited.append(currentRoom)
         nextRoomNum = currentRoom.get('next')
