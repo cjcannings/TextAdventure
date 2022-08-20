@@ -13,17 +13,49 @@ scenes = {
 
     201:
     {
-        'description': 'As you walk towards the fire, you notice a group of adventurers gathered around it. '
+        'description': 'As you walk towards the fire, you notice a group of explorers gathered around it. '
         'One of them starts to move away from the rest of the group, but you are unsure why.',
-        'actions': {'Slowly approach the group.': 202, 'Sneak around behind the straggler': 203}
+        'actions': {'Slowly approach the group': 202, 'Sneak around behind the straggler': 203}
     },
 
     202:
     {
-        'description': 'Someone from the group spots you approaching, and immediately alerts the others. Suddenly, you find yourself outnumbered.',
-        'actions': {'Attack the group.': 'fight', 'Try to talk with the group.': 205, 'Run away, deeper into the forest.': 206},
+        'description': 'Someone from the group spots you approaching, and immediately alerts the others. Suddenly, you find yourself surrounded...',
+        'actions': {'Attack the group': 'fight', 'Try to talk with the group': 205, 'Turn away, deeper into the forest': 206},
         'enemy': 3,
         'next': 204
+    },
+
+    204:
+    {
+        'description': 'You survived.. they\'re all dead but one managed to flee.',
+        'actions': {'Loot the bodies': 'loot', 'Chase after the straggler': 207, 'Look around the camp': 208},
+        'loot': 2,
+        'next': 208
+    },
+
+    205:
+    {
+        'description': '',
+        'actions': {}
+    },
+
+    206:
+    {
+        'description': '',
+        'actions': {}
+    },
+
+    207:
+    {
+        'description': '',
+        'actions': {}
+    },
+
+    208:
+    {
+        'description': 'There isn\'t anything of much use to you lying around here, maybe you should\'ve followed the surivor instead.',
+        'actions': {'Go back into the starter room': 1, 'Go in the same direction you saw the survivor run': 209}
     },
 
     300:
