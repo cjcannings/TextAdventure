@@ -1,8 +1,16 @@
 from rooms import scenes
 from characters import enemies
 from items import items
+from flask import Flask, render_template
 
 import random
+
+app = Flask(__name__)
+
+# route for home page
+@app.route('/')
+def home():
+    return render_template('index.html')
 
 # Hero class for tracking of player properties/attributes
 class Hero:
@@ -284,4 +292,4 @@ def loadScene(currentRoom, hero):
 
 
 if __name__ == '__main__':
-    main()
+    app.run()
