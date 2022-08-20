@@ -40,9 +40,10 @@ class Hero:
             if enemyHealth <= 0:
                 break
             self.health -= enemyDealt
+            print(f'Ouch! You took {enemyDealt} damage!')
+
             if self.health <= 0:
                 endGame()
-            print(f'Ouch! You took {enemyDealt} damage!')
 
         print(f'You killed the {enemyName}! You have {self.health} health remaining. Would you like to heal?')
 
